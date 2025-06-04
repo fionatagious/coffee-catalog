@@ -1,103 +1,149 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+// json data
+import coffeeData from "../../public/data/coffee_varieties.json";
+import filterData from "../../public/data/filter_options.json";
+// components
+import Dropdown from "@/app/components/Dropdown";
+import Footer from "@/app/components/navigation/Footer";
+// utilities
+import formatLabels from "../utils/formatLabels";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // format keys to be more readable, e.g. "optimal_altitude" to "Optimal altitude"
+  const labelsArray = formatLabels(Object.keys(coffeeData[0]));
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  // delay rendering until on the client, prevents "document is not defined" error
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) return null;
+
+  return (
+    <BrowserRouter>
+      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+          <h1>Coffee catalog</h1>
+          <div className="flex flex-wrap gap-2">
+            {filterData.map((filter) => (
+              <Dropdown
+                key={filter.id}
+                label={filter.filterName}
+                paramKey={filter.paramKey}
+                options={filter.options}
+              />
+            ))}
+          </div>
+          {/* display search results below */}
+          {coffeeData.map((variety) => (
+            <div
+              key={variety.id}
+              className="bg-orange-50 p-4 rounded-xl shadow-md w-full"
+            >
+              <div className="flex flex-col my-2">
+                <h2>{variety.variety_name}</h2>
+                <p>{variety.summary}</p>
+              </div>
+              <div className="has-tooltip font-semibold cursor-help">
+                <span className="tooltip rounded-lg shadow-lg p-1 bg-white -mt-8">
+                  how the plant performs in terms of yield, growth, and farming
+                  requirements
+                </span>
+                Argonomic traits
+              </div>
+              <p>
+                {labelsArray[7]}: ⛰️ {variety.optimal_altitude}
+              </p>
+              <p>
+                {labelsArray[12]}: {variety.nutrition_requirement}
+              </p>
+              <p>
+                {labelsArray[6]}: {variety.quality_potential_at_high_altitude}
+              </p>
+              <p>
+                {labelsArray[13]}: 🕓 {variety.ripening_of_fruit}
+              </p>
+              <p>
+                {labelsArray[11]}: 🗓️ {variety.year_of_first_production}
+              </p>
+              <p>
+                {labelsArray[5]}: {variety.yield_potential}
+              </p>
+              <p>
+                {labelsArray[14]}: 🫘 {variety.cherry_to_green_bean_outturn}
+              </p>
+              <p>
+                {labelsArray[15]}: {variety.planting_density}
+              </p>
+              <p>
+                {labelsArray[16]}: {variety.additional_argonomic_information}
+              </p>
+
+              <hr className="my-4 text-slate-200" />
+              <div className="flex justify-between">
+                <div className="flex flex-col my-2">
+                  <div className="has-tooltip font-semibold cursor-help">
+                    <span className="tooltip rounded-lg shadow-lg p-1 bg-white -mt-8">
+                      the plant&apos;s structure and appearance
+                    </span>
+                    🌱 Physical characteristics
+                  </div>
+                  <p>
+                    {labelsArray[2]}: {variety.stature}
+                  </p>
+                  <p>
+                    {labelsArray[3]}: {variety.leaf_tip_color}
+                  </p>
+                  <p>
+                    {labelsArray[4]}: {variety.bean_size}
+                  </p>
+                </div>
+                <div className="flex flex-col my-2">
+                  <div className="has-tooltip font-semibold cursor-help">
+                    <span className="tooltip rounded-lg shadow-lg p-1 bg-white -mt-8">
+                      the variety&apos;s resistance or vulnerability to pests
+                      and diseases
+                    </span>
+                    🦠 Disease susceptibility
+                  </div>
+                  <p>
+                    {labelsArray[9]}: {variety.nematode}
+                  </p>
+                  <p>
+                    {labelsArray[8]}: {variety.coffee_leaf_rust}
+                  </p>
+                  <p>
+                    {labelsArray[10]}: {variety.coffee_berry_disease}
+                  </p>
+                </div>
+                <div className="flex flex-col my-2">
+                  <div className="has-tooltip font-semibold cursor-help">
+                    <span className="tooltip rounded-lg shadow-lg p-1 bg-white -mt-8">
+                      the variety&apos;s lineage and breeding background
+                    </span>
+                    🧬 Genetic background
+                  </div>
+                  <p>
+                    {labelsArray[17]}: {variety.type}
+                  </p>
+                  <p>
+                    {labelsArray[18]}: {variety.genetic_description}
+                  </p>
+                  <p>
+                    {labelsArray[19]}: {variety.lineage}
+                  </p>
+                  <p>
+                    {labelsArray[20]}: {variety.breeder}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </main>
+      </div>
+      <Footer />
+    </BrowserRouter>
   );
 }

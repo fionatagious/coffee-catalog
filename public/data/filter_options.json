@@ -1,0 +1,120 @@
+[
+  {
+    "id": 1,
+    "filterName": "Stature",
+    "paramKey": "stature",
+    "options": ["Dwarf/compact", "Tall"]
+  },
+  {
+    "id": 2,
+    "filterName": "Leaf tip color",
+    "paramKey": "leafTipColor",
+    "options": [
+      "Bronze",
+      "Light Bronze",
+      "Dark Bronze",
+      "Green",
+      "Green or Bronze"
+    ]
+  },
+  {
+    "id": 3,
+    "filterName": "Bean size",
+    "paramKey": "beanSize",
+    "options": ["Below average", "Average", "Large", "Very Large"]
+  },
+  {
+    "id": 4,
+    "filterName": "Yield potential",
+    "paramKey": "yieldPotential",
+    "options": ["Low", "Medium", "Good", "High", "Very high"]
+  },
+  {
+    "id": 5,
+    "filterName": "Quality potential at high altitude",
+    "paramKey": "qualityPotentialHighAltitude",
+    "options": ["Very low", "Low", "Good", "Very good", "Exceptional"]
+  },
+  {
+    "id": 6,
+    "filterName": "Optimal altitude",
+    "paramKey": "optimalAltitude",
+    "options": ["Low", "Medium", "High"]
+  },
+  {
+    "id": 7,
+    "filterName": "Coffee leaf rust",
+    "paramKey": "coffeeLeafRust",
+    "options": ["Resistant", "Susceptible", "Tolerant"]
+  },
+  {
+    "id": 8,
+    "filterName": "Nematode",
+    "paramKey": "nematode",
+    "options": ["Resistant", "Susceptible", "Tolerant"]
+  },
+  {
+    "id": 9,
+    "filterName": "Coffee berry disease",
+    "paramKey": "coffeeBerryDisease",
+    "options": ["Resistant", "Susceptible", "Tolerant"]
+  },
+  {
+    "id": 10,
+    "filterName": "Year of first production",
+    "paramKey": "yearOfFirstProduction",
+    "options": ["Year 2", "Year 3", "Year 4"]
+  },
+  {
+    "id": 11,
+    "filterName": "Nutrition requirement",
+    "paramKey": "nutritionRequirement",
+    "options": ["Low", "Medium", "High", "Very High", "Unknown"]
+  },
+  {
+    "id": 12,
+    "filterName": "Ripening of fruit",
+    "paramKey": "ripeningOfFruit",
+    "options": ["Early", "Average", "Late", "Unknown"]
+  },
+  {
+    "id": 13,
+    "filterName": "Cherry to green bean outturn",
+    "paramKey": "cherryToGreenBeanOutturn",
+    "options": ["Low", "Average", "High", "Very High", "Unknown"]
+  },
+  {
+    "id": 14,
+    "filterName": "Planting density",
+    "paramKey": "plantingDensity",
+    "options": [
+      "1000-2000 plants/ha (using single-stem pruning)",
+      "2000-3000 plants/ha (using single-stem pruning)",
+      "3000-4000 plants/ha (using single-stem pruning)",
+      "4000-5000 plants/ha (using single-stem pruning)",
+      "5000-6000 plants/ha (using single-stem pruning)"
+    ]
+  },
+  {
+    "id": 15,
+    "filterName": "Type",
+    "paramKey": "type",
+    "options": ["Arabica", "Robusta", "Liberica"]
+  },
+  {
+    "id": 16,
+    "filterName": "Genetic description",
+    "paramKey": "geneticDescription",
+    "options": [
+      "Ethiopian landrace",
+      "Bourbon-Typica group (Bourbon related)",
+      "Bourbon-Typica group (Typica related)",
+      "Bourbon-Typica group (Typica and Bourbon related)",
+      "Introgressed (Other)",
+      "Introgressed (Sarchimor related)",
+      "Introgressed (Catimor related)",
+      "F1 hybrid (not introgressed)",
+      "F1 hybrid (introgressed)"
+    ]
+  }
+]

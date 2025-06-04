@@ -20,7 +20,50 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--color-white);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.filter-button {
+  border: 1px solid var(--color-amber-950);
+  background-color: var(--color-orange-50);
+  color: var(--color-amber-950);
+  border-radius: var(--radius-2xl);
+  padding: 0.2rem 0.6rem;
+  min-height: 2.5rem;
+}
+
+.close-button {
+  margin-left: 0.5rem;
+  border-radius: var(--radius-lg);
+  padding: 0.25rem;
+}
+
+.close-button:hover {
+  color: var(--color-amber-950);
+  background-color: var(--color-white);
+  cursor: pointer;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
 }
