@@ -6,7 +6,6 @@ import coffeeData from "../../public/data/coffee_varieties.json";
 import filterData from "../../public/data/filter_options.json";
 // components
 import Dropdown from "@/app/components/Dropdown";
-import Footer from "@/app/components/navigation/Footer";
 // utilities
 import formatLabels from "../utils/formatLabels";
 
@@ -143,7 +142,6 @@ export default function Home() {
           ))}
         </main>
       </div>
-      <Footer />
     </BrowserRouter>
   );
 }
